@@ -2,10 +2,19 @@ const Plaque = require("../models/Plaque");
 
 const createPlaque = async (req, res) => {
   try {
-    const { plaqueId, company } = req.body;
+    const { company } = req.body;
+
+    const lastPlaque = await Plaque.findOne().sort({ plaqueId: -1 });
+
+    let newPlaqueId = "001";
+
+    if (lastPlaque) {
+      const lastId = parseInt(lastPlaque.plaqueId);
+      newPlaqueId = String(lastId + 1).padStart(3, "0");
+    }
 
     const plaque = await Plaque.create({
-      plaqueId,
+      plaqueId: newPlaqueId,
       company,
     });
 
@@ -17,7 +26,6 @@ const createPlaque = async (req, res) => {
     });
   }
 };
-
 const getPlaques = async (req, res) => {
   try {
     const plaques = await Plaque.find().populate("company");
