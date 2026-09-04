@@ -30,8 +30,39 @@ const getCompanies = async (req, res) => {
     });
   }
 };
+const updateCompany = async (req, res) => {
+  try {
+    const { companyId } = req.params;
+    const { name, googleReviewUrl } = req.body;
 
+    const company = await Company.findByIdAndUpdate(
+      companyId,
+      {
+        name,
+        googleReviewUrl,
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!company) {
+      return res.status(404).json({
+        message: "Empresa no encontrada",
+      });
+    }
+
+    res.status(200).json(company);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Error al actualizar la empresa",
+    });
+  }
+};
 module.exports = {
   createCompany,
   getCompanies,
+  updateCompany,
 };
