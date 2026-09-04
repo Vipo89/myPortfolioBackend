@@ -24,7 +24,7 @@ server.use(
       "http://localhost:5173",
       "https://victorparras.com",
     ],
-    methods: ["GET", "POST", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
