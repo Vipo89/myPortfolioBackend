@@ -31,11 +31,16 @@ server.use(
 
 server.use("/companies", companyRouter);
 server.use("/plaques", plaqueRouter);
-server.use("/interactions", interactionRouter);
+server.use("/interactions", interactionRouter); 
 server.use("/auth", authRouter);
 
 server.get("/nfc/:plaqueId", nfcInteraction);
 server.get("/qr/:plaqueId", qrInteraction);
+server.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+  });
+});
 
 const PORT = process.env.PORT;
 
