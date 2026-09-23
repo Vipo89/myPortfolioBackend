@@ -9,6 +9,7 @@
   const interactionRouter = require("./src/routers/interactionRouter");
   const authRouter = require("./src/routers/authRouter");
   const contactRouter = require("./src/routers/contactRouter");
+  const aiRouter = require("./src/routers/aiRouter");
 
   const {
     nfcInteraction,
@@ -35,6 +36,7 @@
   server.use("/interactions", interactionRouter); 
   server.use("/auth", authRouter);
   server.use("/contact", contactRouter);
+  server.use("/chat", aiRouter);
 
   server.get("/nfc/:plaqueId", nfcInteraction);
   server.get("/qr/:plaqueId", qrInteraction);
